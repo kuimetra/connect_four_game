@@ -27,7 +27,7 @@ def play_game(col):
         update_board()
         if game.check_match():
             game.game_over = True
-            messagebox.showinfo("Winner", f"Player {game.player_id} wins!")
+            messagebox.showinfo("Winner", f"Player {game.player} wins!")
         else:
             game.pass_turn()
 
@@ -67,4 +67,5 @@ column6_btn.place(x=215, y=35, height=30, width=25)
 column7_btn.place(x=249, y=35, height=30, width=25)
 board.place(x=35, y=75, height=225, width=250)
 new_game_btn.place(x=35, y=310, height=35, width=250)
+
 mainloop()

@@ -18,25 +18,25 @@ def is_sub_array(a, id):
 
 class Connect4:
     def __init__(self):
-        self.grid = [[0] * 6 for _ in range(7)]
-        self.player_id = 1
+        self.grid = [["."] * 6 for _ in range(7)]
+        self.player = "x"
         self.game_over = False
 
     def get_grid(self):
         return list(np.rot90(self.grid).flatten())
 
     def get_amount_of_filled_cells(self, col):
-        return len([*filter(lambda x: x != 0, self.grid[col])])
+        return len([*filter(lambda x: x != ".", self.grid[col])])
 
     def check_free_space(self):
-        return np.count_nonzero(np.mat(self.grid) == 0)
+        return np.count_nonzero(np.mat(self.grid) == ".")
 
     @staticmethod
     def get_diag(grid):
         return [grid.diagonal(i) for i in range(-3, 5)]
 
     def any_match(self, grid):
-        return any(is_sub_array(col, self.player_id) for col in grid)
+        return any(is_sub_array(col, self.player) for col in grid)
 
     def check_match(self):
         rotated_grid = np.rot90(self.grid)
@@ -47,10 +47,10 @@ class Connect4:
 
     def make_move(self, col):
         self.grid[col].pop()
-        self.grid[col].insert(self.get_amount_of_filled_cells(col), self.player_id)
+        self.grid[col].insert(self.get_amount_of_filled_cells(col), self.player)
 
     def pass_turn(self):
-        if self.player_id == 1:
-            self.player_id = 2
-        elif self.player_id == 2:
-            self.player_id = 1
+        if self.player == "x":
+            self.player = "o"
+        elif self.player == "o":
+            self.player = "x"
