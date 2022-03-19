@@ -16,7 +16,7 @@ def update_board():
 
 
 def play_game(col):
-    if game.game_over:
+    if game.game_over or game.check_free_space() == 0:
         answer = messagebox.askyesno(title="Game over", message="Do you want to start a new game?")
         if answer:
             start_game()

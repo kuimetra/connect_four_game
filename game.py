@@ -28,6 +28,9 @@ class Connect4:
     def get_amount_of_filled_cells(self, col):
         return len([*filter(lambda x: x != 0, self.grid[col])])
 
+    def check_free_space(self):
+        return np.count_nonzero(np.mat(self.grid) == 0)
+
     @staticmethod
     def get_diag(grid):
         return [grid.diagonal(i) for i in range(-3, 5)]
